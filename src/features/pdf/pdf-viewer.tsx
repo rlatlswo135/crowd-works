@@ -5,18 +5,17 @@ import type {
   PDFTextItem,
 } from "./types/pdf.types";
 
+import { useRef, useState, type CSSProperties } from "react";
+import clsx from "clsx";
+
+import { useResizeObserver } from "@/hooks/use-resize-observer";
+import { useScrollToBlock } from "./hooks/use-scroll-to-block";
+import type { PageCallback } from "react-pdf/dist/shared/types.js";
+
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
-import { useRef, useState, type CSSProperties } from "react";
-import { useResizeObserver } from "@/hooks/use-resize-observer";
-import type { PageCallback } from "react-pdf/dist/shared/types.js";
-import clsx from "clsx";
-import { useScrollToBlock } from "./hooks/use-scroll-to-block";
 
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  "pdfjs-dist/build/pdf.worker.min.mjs",
-  import.meta.url
-).toString();
+pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 
 export const PDFViewer = ({
   selectId,
@@ -24,10 +23,6 @@ export const PDFViewer = ({
   setHoverId,
   setSelectId,
 }: PDFCommonProps) => {
-  console.log(
-    new URL("pdfjs-dist/build/pdf.worker.min.mjs", import.meta.url).toString()
-  );
-
   const containerRef = useRef<HTMLDivElement>(null);
 
   const [originSize, setOriginSize] = useState({
