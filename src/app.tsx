@@ -1,14 +1,35 @@
-import Data from "@/data/documents/report.json";
-import { PdfTest } from "./pdf-test";
+import Data from "/public/report.json";
+import { PDFTextBlocks } from "./features/pdf/pdf-text-blocks";
+import type {
+  PDFBlockIdState,
+  PDFTextItem,
+} from "./features/pdf/types/pdf.types";
+import { useState } from "react";
+import { PDFViewer } from "./features/pdf/pdf-viewer";
 
-export const App = () => {
-  console.log("Data", Data.texts, Data.tables, Data.pictures);
+export function App() {
+  const [hoverId, setHoverId] = useState<PDFBlockIdState>(null);
+  const [selectId, setSelectId] = useState<PDFBlockIdState>(null);
+
   return (
-    <div className="w-screen h-screen grid grid-cols-2">
-      <div className="border-2 border-amber-200">
-        <PdfTest />
+    <div className="h-screen w-full grid grid-cols-2">
+      <div className="h-full overflow-hidden">
+        <PDFViewer
+          selectId={selectId}
+          textBlocks={Data.texts as PDFTextItem[]}
+          setHoverId={setHoverId}
+          setSelectId={setSelectId}
+        />
       </div>
-      <div className="border-2 border-red-400">json영역</div>
+      <div className="h-full overflow-hidden">
+        <PDFTextBlocks
+          textBlocks={Data.texts as PDFTextItem[]}
+          selectId={selectId}
+          hoverId={hoverId}
+          setHoverId={setHoverId}
+          setSelectId={setSelectId}
+        />
+      </div>
     </div>
   );
-};
+}
