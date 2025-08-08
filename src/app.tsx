@@ -11,24 +11,20 @@ export function App() {
   const [hoverId, setHoverId] = useState<PDFBlockIdState>(null);
   const [selectId, setSelectId] = useState<PDFBlockIdState>(null);
 
+  const commonProps = {
+    selectId,
+    setHoverId,
+    setSelectId,
+    textBlocks: Data.texts as PDFTextItem[],
+  };
+
   return (
     <div className="h-screen w-full grid grid-cols-2">
       <div className="h-full overflow-hidden">
-        <PDFViewer
-          selectId={selectId}
-          textBlocks={Data.texts as PDFTextItem[]}
-          setHoverId={setHoverId}
-          setSelectId={setSelectId}
-        />
+        <PDFViewer {...commonProps} />
       </div>
       <div className="h-full overflow-hidden">
-        <PDFTextBlocks
-          textBlocks={Data.texts as PDFTextItem[]}
-          selectId={selectId}
-          hoverId={hoverId}
-          setHoverId={setHoverId}
-          setSelectId={setSelectId}
-        />
+        <PDFTextBlocks hoverId={hoverId} {...commonProps} />
       </div>
     </div>
   );
