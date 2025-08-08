@@ -21,7 +21,9 @@ export const PDFTextBlocks = ({
 
   const handleClick = (id: PDFBlockId) => {
     setSelectId(id);
-    setHoverId(null);
+    if (hoverId) {
+      setHoverId(null);
+    }
   };
 
   return (

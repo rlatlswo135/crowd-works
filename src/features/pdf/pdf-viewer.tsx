@@ -57,7 +57,10 @@ export const PDFViewer = ({
 
   const handleMouseEnter = (id: PDFBlockId) => {
     setHoverId(id);
-    setSelectId(null);
+
+    if (selectId) {
+      setSelectId(null);
+    }
   };
 
   const handleMouseLeave = () => {
