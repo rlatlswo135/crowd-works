@@ -1,1 +1,5 @@
 @import "tailwindcss";
+
+@utility pdf-selected {
+  @apply border-2 bg-amber-200/20 border-red-400;
+}

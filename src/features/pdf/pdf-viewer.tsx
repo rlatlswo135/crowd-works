@@ -41,7 +41,7 @@ export const PDFViewer = ({
 
   const getOverlayStyle = (item: PDFTextItem): CSSProperties => {
     const bbox = item.prov[0].bbox;
-    const ratio = width / originSize.width;
+    const ratio = originSize.width ? width / originSize.width : 1;
 
     const locationPadding = 6;
     const sizePadding = 10;
@@ -76,15 +76,12 @@ export const PDFViewer = ({
           />
           {textBlocks.map((text) => (
             <div
+              key={text.self_ref}
               ref={(el) => setBlockRef(el, text.self_ref)}
               onMouseEnter={() => handleMouseEnter(text.self_ref)}
-              className={clsx(
-                "z-10 border-red-400 rounded-lg hover:border-1 hover:bg-amber-200/20",
-                {
-                  "bg-amber-200/20": selectId == text.self_ref,
-                  "border-1": selectId == text.self_ref,
-                }
-              )}
+              className={clsx("z-10 rounded-lg hover:pdf-selected", {
+                "pdf-selected": selectId == text.self_ref,
+              })}
               style={getOverlayStyle(text)}
             />
           ))}

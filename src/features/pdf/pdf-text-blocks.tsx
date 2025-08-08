@@ -28,11 +28,12 @@ export const PDFTextBlocks = ({
     <div className="h-full p-4 overflow-y-auto">
       {textBlocks.map((text) => (
         <div
+          key={text.self_ref}
           ref={(el) => setBlockRef(el, text.self_ref)}
           className={clsx(
             "border-1 border-slate-400 mb-2 p-4 rounded-xl cursor-pointer",
             {
-              "bg-amber-200":
+              "pdf-selected":
                 hoverId == text.self_ref || selectId == text.self_ref,
             }
           )}
