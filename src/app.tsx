@@ -1,4 +1,4 @@
-import Data from "/public/report.json";
+import Data from "@/data/report.json";
 import { PDFTextBlocks } from "./features/pdf/pdf-text-blocks";
 import type {
   PDFBlockIdState,

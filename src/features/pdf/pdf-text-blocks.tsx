@@ -31,10 +31,12 @@ export const PDFTextBlocks = ({
           key={text.self_ref}
           ref={(el) => setBlockRef(el, text.self_ref)}
           className={clsx(
-            "border-1 border-slate-400 mb-2 p-4 rounded-xl cursor-pointer",
+            "mb-2 p-4 rounded-xl cursor-pointer hover:bg-slate-400/20",
             {
+              "border-1 border-slate-400":
+                hoverId !== text.self_ref && selectId !== text.self_ref,
               "pdf-selected":
-                hoverId == text.self_ref || selectId == text.self_ref,
+                hoverId === text.self_ref || selectId === text.self_ref,
             }
           )}
           onClick={() => handleClick(text.self_ref)}

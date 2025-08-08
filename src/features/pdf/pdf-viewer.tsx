@@ -65,6 +65,10 @@ export const PDFViewer = ({
     setSelectId(null);
   };
 
+  const handleMouseLeave = () => {
+    setHoverId(null);
+  };
+
   return (
     <div className="h-full overflow-y-auto" ref={containerRef}>
       <Document file="/report.pdf">
@@ -79,6 +83,7 @@ export const PDFViewer = ({
               key={text.self_ref}
               ref={(el) => setBlockRef(el, text.self_ref)}
               onMouseEnter={() => handleMouseEnter(text.self_ref)}
+              onMouseLeave={handleMouseLeave}
               className={clsx("z-10 rounded-lg hover:pdf-selected", {
                 "pdf-selected": selectId == text.self_ref,
               })}
